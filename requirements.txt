@@ -3,4 +3,4 @@ pandas
 numpy
 scikit-learn==1.5.2
 SpeechRecognition
-pydub
+imageio-ffmpeg
