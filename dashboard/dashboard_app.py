@@ -1,10 +1,17 @@
 # =================================================================
-# FILE ĐÃ TỐI ƯU TỐC ĐỘ: dashboard/app.py
-# ĐỒNG BỘ LUỒNG GỌI TÀI NGUYÊN TỐC ĐỘ CAO QUA CORE ENGINE
+# FILE ĐÃ SỬA LỖI ĐƯỜNG DẪN MÔ-ĐUN: dashboard/dashboard_app.py
+# Đường dẫn lưu trữ trên GitHub: dashboard/dashboard_app.py
 # =================================================================
 import streamlit as st
+import sys
+import os
+
+# --- GIẢI PHÁP ĐỘT PHÁ: ÉP PYTHON ĐƯA THƯ MỤC GỐC VÀO HỆ THỐNG TÌM KIẾM ---
+# Đoạn code này giúp file dashboard_app.py gọi được thư mục src ở ngoài cùng mà không bị lỗi
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from src.data_loader import load_and_cache_system_resources
 import src.config as config
-from src.data_loader import load_and_cache_system_resources  # Gọi hàm hợp nhất tốc độ cao
 import dashboard.engine as engine_views
 
 # Khởi tạo cấu hình giao diện nền tối Tech Dashboard diện rộng (Wide Layout)
