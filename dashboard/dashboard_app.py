@@ -1,19 +1,27 @@
 # =================================================================
-# FILE ĐÃ SỬA LỖI IMPORT MÔ-ĐUN: dashboard/dashboard_app.py
+# FILE ĐÃ SỬA LỖI ĐƯỜNG DẪN MODULE: dashboard/dashboard_app.py
 # Đường dẫn lưu trữ trên GitHub: dashboard/dashboard_app.py
 # =================================================================
 import streamlit as st
 import sys
 import os
 
-# ÉP LUỒNG TÌM KIẾM HỆ THỐNG NGẦM NHẬN DIỆN THƯ MỤC GỐC NGOÀI CÙNG
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# --- GIẢI PHÁP ĐỒNG BỘ TOÀN CỤC: ĐƯA CẢ THƯ MỤC GỐC VÀ THƯ MỤC DASHBOARD VÀO LUỒNG TÌM KIẾM ---
+# Đoạn code này giúp Python tìm thấy cả thư mục 'src' bên ngoài và file 'engine.py' bên trong
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+
+sys.path.append(parent_dir)  # Tìm kiếm hướng ra ngoài (cho thư mục src)
+sys.path.append(current_dir) # Tìm kiếm hướng nội bộ (cho file engine.py và folder pages)
 
 from src.data_loader import load_and_cache_system_resources
 import src.config as config
 
-# --- ĐÃ SỬA LỖI GỐC: ĐỒNG BỘ GỌI THẲNG FILE ENGINE VÀ PAGES CÙNG CẤP ---
-import engine as engine_views  # Sửa từ 'import dashboard.engine' thành 'import engine'
+# Lúc này hệ thống đã nhận diện được file engine và folder pages nội bộ
+import engine as engine_views  
+import pages.prediction as p1
+import pages.business_insights as p2
+import pages.aspects_features as p3_to_p20
 
 # Khởi tạo cấu hình giao diện nền tối Tech Dashboard diện rộng (Wide Layout)
 st.markdown("""
@@ -39,3 +47,4 @@ page_selection = st.sidebar.radio("Chọn trang chức năng hệ thống (20 Tr
 
 # Kết xuất nội dung động tức thì thông qua bộ lõi Engine
 engine_views.render_selected_page(page_selection, ai_engine, df_matrix, precomputed_metrics)
+
