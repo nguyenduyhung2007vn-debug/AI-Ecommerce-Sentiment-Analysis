@@ -1,13 +1,13 @@
 # =================================================================
-# KHỐI CODE 4: KHUNG ĐIỀU HƯỚNG SIDEBAR ĐỘNG CHO DANH MỤC 20 TRANG WEB
-# Đường dẫn lưu trữ trên GitHub: dashboard/app.py
+# FILE ĐÃ TỐI ƯU TỐC ĐỘ: dashboard/app.py
+# ĐỒNG BỘ LUỒNG GỌI TÀI NGUYÊN TỐC ĐỘ CAO QUA CORE ENGINE
 # =================================================================
 import streamlit as st
 import src.config as config
-from src.data_loader import load_system_assets
+from src.data_loader import load_and_cache_system_resources  # Gọi hàm hợp nhất tốc độ cao
 import dashboard.engine as engine_views
 
-# Áp dụng giao diện CSS Style nền tối Tech Dashboard đồng bộ thiết kế của nhóm
+# Khởi tạo cấu hình giao diện nền tối Tech Dashboard diện rộng (Wide Layout)
 st.markdown("""
     <style>
     .main { background-color: #0F172A; color: #FFFFFF; }
@@ -18,9 +18,10 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 try:
-    ai_engine, df_matrix = load_system_assets()
+    # Kích hoạt nạp bộ não AI và ma trận dữ liệu trực tiếp từ thanh RAM máy chủ đám mây
+    ai_engine, df_matrix = load_and_cache_system_resources()
 except Exception as e:
-    st.error(f"Hệ thống gặp sự cố tải tài nguyên pkl/csv: {e}")
+    st.error(f"Hệ thống gặp sự cố tải tài nguyên pkl/csv tốc độ cao. Chi tiết lỗi: {e}")
 
 # Lập trình thanh Menu điều hướng danh mục 20 trang hiển thị độc lập tại Sidebar trái
 st.sidebar.title("InsightPulse 📊")
@@ -28,5 +29,5 @@ st.sidebar.subheader("Hệ thống Quản trị AI - DUE")
 st.sidebar.markdown("---")
 page_selection = st.sidebar.radio("Chọn trang chức năng hệ thống (20 Trang):", list(config.PAGES_DICTIONARY.values()))
 
-# Kích hoạt luồng xử lý render nội dung trang được lựa chọn thông qua Core Engine
+# Kết xuất nội dung động tức thì thông qua bộ lõi Engine
 engine_views.render_selected_page(page_selection, ai_engine, df_matrix)
