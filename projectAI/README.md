@@ -18,26 +18,23 @@ Tri thức khai phá từ mô hình giúp doanh nghiệp định lượng chính
 Mã nguồn dự án được tổ chức mô-đun hóa chuyên nghiệp, phân tách độc lập giữa tầng xử lý toán học ngầm (`src/`) và tầng giao diện hiển thị (`dashboard/`):
 
 ```text
-AI_Ecommerce_Sentiment/
-│
-├── src/                               # Tầng xử lý logic thuật toán ngầm
-│   ├── config.py                      # Định nghĩa từ khóa đặc trưng và cấu trúc 20 trang
-│   ├── pipeline.py                    # Pipeline tự động trích xuất ma trận thuộc tính 21 cột
-│   └── data_loader.py                 # Tải tài nguyên nhị phân tối ưu hóa qua bộ nhớ đệm Cache
-│
-├── dashboard/                         # Tầng giao diện người dùng tương tác
-│   ├── app.py                         # File khởi chạy giao diện Web nền tối và Sidebar Menu
-│   ├── engine.py                      # Bộ điều phối luồng kết xuất nội dung động
-│   └── pages/                         # Phân hệ chi tiết cấu trúc các trang hiển thị
-│       ├── prediction.py              # TRANG 1: Phân hệ kiểm thử và dự báo thời gian thực
-│       ├── business_insights.py       # TRANG 2: Phân hệ Analytics Dashboard thống kê vĩ mô
-│       └── aspects_features.py        # TRANG 3->20: Phân hệ lượng hóa chi tiết thuộc tính
-│
-├── ai_sentiment_model.pkl             # File cứng "bộ não" AI đóng gói dạng nhị phân
-├── du_lieu_24_cols.csv                # File tập dữ liệu ma trận phân tích hệ thống gốc
-├── requirements.txt                   # File cấu hình môi trường ảo máy chủ đám mây
-└── README.md                          # File hướng dẫn và giải trình kỹ thuật hệ thống
-```
+AI-Ecommerce-Sentiment-Analysis [Public]
+├── src
+│   ├── config.py                      # Cấu hình danh mục trang
+│   ├── data_loader.py                 # Bộ nạp cache tối ưu hóa RAM
+│   └── pipeline.py                    # Pipeline bóc tách 21 cột toán học
+├── dashboard
+│   ├── app.py                         # Giao diện chính Tech Style nền tối
+│   ├── engine.py                      # Bộ điều phối luồng chuyển trang động
+│   └── pages
+│       ├── aspects_features.py        # Trang 3->20: Lượng hóa khía cạnh phòng ban
+│       ├── business_insights.py       # TRANG 2: Analytics Dashboard vĩ mô
+│       └── prediction.py              # TRANG 1: Nhận diện Đa phương thức (Chữ + Video)
+├── ai_sentiment_model.pkl             # File cứng "bộ não" AI Random Forest
+├── du_lieu_24_cols.csv                # Tập dữ liệu ma trận phân tích gốc
+├── requirements.txt                   # Danh sách thư viện Python cần cài
+├── packages.txt                       # Bộ giải mã video hệ thống Linux ngầm
+└── README.md                          # Hướng dẫn End-to-End AI Pipeline dự án
 
 ---
 
