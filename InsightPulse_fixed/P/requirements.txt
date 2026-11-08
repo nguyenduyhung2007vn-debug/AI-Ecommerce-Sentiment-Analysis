@@ -1,6 +1,0 @@
-streamlit>=1.40
-pandas
-numpy
-scikit-learn==1.9.1
-SpeechRecognition
-imageio-ffmpeg
